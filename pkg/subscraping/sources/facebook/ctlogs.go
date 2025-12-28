@@ -5,14 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"net/url"
+	"slices"
 	"time"
 
 	"github.com/projectdiscovery/gologger"
 	"github.com/projectdiscovery/retryablehttp-go"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
-	errorutil "github.com/projectdiscovery/utils/errors"
-	"github.com/projectdiscovery/utils/generic"
-	urlutil "github.com/projectdiscovery/utils/url"
 )
 
 // source: https://developers.facebook.com/tools/ct
@@ -36,7 +35,7 @@ type apiKey struct {
 // FetchAccessToken fetches the access token for the api key
 // using app id and secret
 func (k *apiKey) FetchAccessToken() {
-	if generic.EqualsAny("", k.AppID, k.Secret) {
+	if slices.Contains([]string{k.AppID, k.Secret}, "") {
 		k.Error = fmt.Errorf("invalid app id or secret")
 		return
 	}
@@ -125,7 +124,7 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 			response := &response{}
 			if err := json.Unmarshal(bin, response); err != nil {
 				s.errors++
-				results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: errorutil.NewWithErr(err).Msgf("failed to unmarshal response: %s", string(bin))}
+				results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: fmt.Errorf("failed to unmarshal response: %w, %s", err, string(bin))}
 				return
 			}
 			for _, v := range response.Data {
@@ -197,11 +196,13 @@ func (s *Source) Statistics() subscraping.Statistics {
 	}
 }
 
-func updateParamInURL(url, param, value string) string {
-	urlx, err := urlutil.Parse(url)
+func updateParamInURL(u, param, value string) string {
+	urlx, err := url.Parse(u)
 	if err != nil {
-		return url
+		return u
 	}
-	urlx.Params.Set(param, value)
+	q := urlx.Query()
+	q.Set(param, value)
+	urlx.RawQuery = q.Encode()
 	return urlx.String()
 }

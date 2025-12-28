@@ -1,12 +1,9 @@
 package runner
 
-import (
-	fileutil "github.com/projectdiscovery/utils/file"
-	stringsutil "github.com/projectdiscovery/utils/strings"
-)
+import "github.com/projectdiscovery/subfinder/v2/pkg/stringsutil"
 
 func loadFromFile(file string) ([]string, error) {
-	chanItems, err := fileutil.ReadFile(file)
+	chanItems, err := ReadFile(file)
 	if err != nil {
 		return nil, err
 	}

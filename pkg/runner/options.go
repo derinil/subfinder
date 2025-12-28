@@ -4,41 +4,33 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"math"
 	"os"
-	"path/filepath"
 	"regexp"
+	"strconv"
 	"strings"
+	"time"
 
 	"github.com/projectdiscovery/chaos-client/pkg/chaos"
 	"github.com/projectdiscovery/goflags"
 	"github.com/projectdiscovery/gologger"
 	"github.com/projectdiscovery/subfinder/v2/pkg/passive"
 	"github.com/projectdiscovery/subfinder/v2/pkg/resolve"
-	envutil "github.com/projectdiscovery/utils/env"
-	fileutil "github.com/projectdiscovery/utils/file"
-	folderutil "github.com/projectdiscovery/utils/folder"
-	logutil "github.com/projectdiscovery/utils/log"
-)
-
-var (
-	configDir                     = folderutil.AppConfigDirOrDefault(".", "subfinder")
-	defaultConfigLocation         = envutil.GetEnvOrDefault("SUBFINDER_CONFIG", filepath.Join(configDir, "config.yaml"))
-	defaultProviderConfigLocation = envutil.GetEnvOrDefault("SUBFINDER_PROVIDER_CONFIG", filepath.Join(configDir, "provider-config.yaml"))
 )
 
 // Options contains the configuration options for tuning
 // the subdomain enumeration process.
 type Options struct {
-	Verbose            bool                // Verbose flag indicates whether to show verbose output or not
-	NoColor            bool                // NoColor disables the colored output
-	JSON               bool                // JSON specifies whether to use json for output format or text file
-	HostIP             bool                // HostIP specifies whether to write subdomains in host:ip format
-	Silent             bool                // Silent suppresses any extra text and only writes subdomains to screen
-	ListSources        bool                // ListSources specifies whether to list all available sources
-	RemoveWildcard     bool                // RemoveWildcard specifies whether to remove potential wildcard or dead subdomains from the results.
-	CaptureSources     bool                // CaptureSources specifies whether to save all sources that returned a specific domains or just the first source
-	Stdin              bool                // Stdin specifies whether stdin input was given to the process
+	Verbose        bool // Verbose flag indicates whether to show verbose output or not
+	NoColor        bool // NoColor disables the colored output
+	JSON           bool // JSON specifies whether to use json for output format or text file
+	HostIP         bool // HostIP specifies whether to write subdomains in host:ip format
+	Silent         bool // Silent suppresses any extra text and only writes subdomains to screen
+	ListSources    bool // ListSources specifies whether to list all available sources
+	RemoveWildcard bool // RemoveWildcard specifies whether to remove potential wildcard or dead subdomains from the results.
+	CaptureSources bool // CaptureSources specifies whether to save all sources that returned a specific domains or just the first source
+	// Stdin              bool                // Stdin specifies whether stdin input was given to the process
 	Version            bool                // Version specifies if we should just show version and exit
 	OnlyRecursive      bool                // Recursive specifies whether to use only recursive subdomain enumeration sources
 	All                bool                // All specifies whether to use all (slow) sources.
@@ -72,9 +64,14 @@ type Options struct {
 // OnResultCallback (hostResult)
 type OnResultCallback func(result *resolve.HostEntry)
 
+func DisableDefaultLogger() {
+	log.SetFlags(0)
+	log.SetOutput(io.Discard)
+}
+
 // ParseOptions parses the command line flags provided by a user
 func ParseOptions() *Options {
-	logutil.DisableDefaultLogger()
+	DisableDefaultLogger()
 
 	options := &Options{}
 
@@ -114,8 +111,6 @@ func ParseOptions() *Options {
 	)
 
 	flagSet.CreateGroup("configuration", "Configuration",
-		flagSet.StringVar(&options.Config, "config", defaultConfigLocation, "flag config file"),
-		flagSet.StringVarP(&options.ProviderConfig, "provider-config", "pc", defaultProviderConfigLocation, "provider config file"),
 		flagSet.StringSliceVar(&options.Resolvers, "r", nil, "comma separated list of resolvers to use", goflags.NormalizedStringSliceOptions),
 		flagSet.StringVarP(&options.ResolverList, "rlist", "rL", "", "file containing list of resolvers to use"),
 		flagSet.BoolVarP(&options.RemoveWildcard, "active", "nW", false, "display active subdomains only"),
@@ -145,28 +140,11 @@ func ParseOptions() *Options {
 	// set chaos mode
 	chaos.IsSDK = false
 
-	if exists := fileutil.FileExists(defaultProviderConfigLocation); !exists {
-		if err := createProviderConfigYAML(defaultProviderConfigLocation); err != nil {
-			gologger.Error().Msgf("Could not create provider config file: %s\n", err)
-		}
-	}
-
-	if options.Config != defaultConfigLocation {
-		// An empty source file is not a fatal error
-		if err := flagSet.MergeConfigFile(options.Config); err != nil && !errors.Is(err, io.EOF) {
-			gologger.Fatal().Msgf("Could not read config: %s\n", err)
-		}
-	}
-
 	// Default output is stdout
 	options.Output = os.Stdout
 
-	// Check if stdin pipe was given
-	options.Stdin = fileutil.HasStdin()
-
 	if options.Version {
 		gologger.Info().Msgf("Current Version: %s\n", version)
-		gologger.Info().Msgf("Subfinder Config Directory: %s", configDir)
 		os.Exit(0)
 	}
 
@@ -243,4 +221,44 @@ var defaultRateLimits = []string{
 	// "gitlab=2/s",
 	"github=83/m",
 	"hudsonrock=5/s",
+}
+
+type EnvType interface {
+	~string | ~int | ~bool | ~float64 | time.Duration | ~rune
+}
+
+func GetEnvOrDefault[T EnvType](key string, defaultValue T) T {
+	value := os.Getenv(key)
+	if value == "" {
+		return defaultValue
+	}
+	switch any(defaultValue).(type) {
+	case string:
+		return any(value).(T)
+	case int:
+		intVal, err := strconv.Atoi(value)
+		if err != nil || value == "" {
+			return defaultValue
+		}
+		return any(intVal).(T)
+	case bool:
+		boolVal, err := strconv.ParseBool(value)
+		if err != nil || value == "" {
+			return defaultValue
+		}
+		return any(boolVal).(T)
+	case float64:
+		floatVal, err := strconv.ParseFloat(value, 64)
+		if err != nil || value == "" {
+			return defaultValue
+		}
+		return any(floatVal).(T)
+	case time.Duration:
+		durationVal, err := time.ParseDuration(value)
+		if err != nil || value == "" {
+			return defaultValue
+		}
+		return any(durationVal).(T)
+	}
+	return defaultValue
 }

@@ -4,21 +4,21 @@ import (
 	"errors"
 	"fmt"
 	"regexp"
+	"slices"
 	"strings"
 
 	"github.com/projectdiscovery/gologger"
 	"github.com/projectdiscovery/gologger/formatter"
 	"github.com/projectdiscovery/gologger/levels"
+	"github.com/projectdiscovery/subfinder/v2/pkg/mapsutil"
 	"github.com/projectdiscovery/subfinder/v2/pkg/passive"
-	mapsutil "github.com/projectdiscovery/utils/maps"
-	sliceutil "github.com/projectdiscovery/utils/slice"
 )
 
 // validateOptions validates the configuration options passed
 func (options *Options) validateOptions() error {
 	// Check if domain, list of domains, or stdin info was provided.
 	// If none was provided, then return.
-	if len(options.Domain) == 0 && options.DomainsFile == "" && !options.Stdin {
+	if len(options.Domain) == 0 && options.DomainsFile == "" {
 		return errors.New("no input list provided")
 	}
 
@@ -61,7 +61,7 @@ func (options *Options) validateOptions() error {
 
 	sources := mapsutil.GetKeys(passive.NameSourceMap)
 	for source := range options.RateLimits.AsMap() {
-		if !sliceutil.Contains(sources, source) {
+		if !slices.Contains(sources, source) {
 			return fmt.Errorf("invalid source %s specified in -rls flag", source)
 		}
 	}

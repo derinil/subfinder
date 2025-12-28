@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"slices"
 	"strings"
 	"testing"
 
 	"github.com/projectdiscovery/gologger"
 	"github.com/projectdiscovery/retryablehttp-go"
-	"github.com/projectdiscovery/utils/generic"
 )
 
 var (
@@ -25,7 +25,7 @@ func TestFacebookSource(t *testing.T) {
 
 	updateWithEnv(&fb_API_ID)
 	updateWithEnv(&fb_API_SECRET)
-	if generic.EqualsAny("", fb_API_ID, fb_API_SECRET) {
+	if slices.Contains([]string{fb_API_ID, fb_API_SECRET}, "") {
 		t.SkipNow()
 	}
 	k := apiKey{

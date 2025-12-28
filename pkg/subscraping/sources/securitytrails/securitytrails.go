@@ -12,7 +12,6 @@ import (
 	jsoniter "github.com/json-iterator/go"
 
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
-	"github.com/projectdiscovery/utils/ptr"
 )
 
 type response struct {
@@ -72,7 +71,7 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 				resp, err = session.Get(ctx, fmt.Sprintf("https://api.securitytrails.com/v1/scroll/%s", scrollId), "", headers)
 			}
 
-			if err != nil && ptr.Safe(resp).StatusCode == 403 {
+			if err != nil && safePtr(resp).StatusCode == 403 {
 				resp, err = session.Get(ctx, fmt.Sprintf("https://api.securitytrails.com/v1/domain/%s/subdomains", domain), "", headers)
 			}
 
@@ -157,4 +156,11 @@ func (s *Source) Statistics() subscraping.Statistics {
 		TimeTaken: s.timeTaken,
 		Skipped:   s.skipped,
 	}
+}
+
+func safePtr[T any](v *T) T {
+	if v == nil {
+		return *new(T)
+	}
+	return *v
 }

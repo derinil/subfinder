@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/projectdiscovery/ratelimit"
-	mapsutil "github.com/projectdiscovery/utils/maps"
+	"github.com/projectdiscovery/subfinder/v2/pkg/mapsutil"
 )
 
 type CtxArg string
