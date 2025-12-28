@@ -12,7 +12,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/projectdiscovery/chaos-client/pkg/chaos"
 	"github.com/projectdiscovery/goflags"
 	"github.com/projectdiscovery/gologger"
 	"github.com/projectdiscovery/subfinder/v2/pkg/passive"
@@ -136,9 +135,6 @@ func ParseOptions() *Options {
 		fmt.Println(err.Error())
 		os.Exit(1)
 	}
-
-	// set chaos mode
-	chaos.IsSDK = false
 
 	// Default output is stdout
 	options.Output = os.Stdout
