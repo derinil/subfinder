@@ -2,7 +2,6 @@ package runner
 
 import (
 	"github.com/projectdiscovery/gologger"
-	updateutils "github.com/projectdiscovery/utils/update"
 )
 
 const banner = `
@@ -23,12 +22,4 @@ const version = `v2.11.0`
 func showBanner() {
 	gologger.Print().Msgf("%s\n", banner)
 	gologger.Print().Msgf("\t\tprojectdiscovery.io\n\n")
-}
-
-// GetUpdateCallback returns a callback function that updates subfinder
-func GetUpdateCallback() func() {
-	return func() {
-		showBanner()
-		updateutils.GetUpdateToolCallback("subfinder", version)()
-	}
 }

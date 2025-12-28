@@ -19,7 +19,6 @@ import (
 	fileutil "github.com/projectdiscovery/utils/file"
 	folderutil "github.com/projectdiscovery/utils/folder"
 	logutil "github.com/projectdiscovery/utils/log"
-	updateutils "github.com/projectdiscovery/utils/update"
 )
 
 var (
@@ -106,11 +105,6 @@ func ParseOptions() *Options {
 		flagSet.IntVar(&options.Threads, "t", 10, "number of concurrent goroutines for resolving (-active only)"),
 	)
 
-	flagSet.CreateGroup("update", "Update",
-		flagSet.CallbackVarP(GetUpdateCallback(), "update", "up", "update subfinder to latest version"),
-		flagSet.BoolVarP(&options.DisableUpdateCheck, "disable-update-check", "duc", false, "disable automatic subfinder update check"),
-	)
-
 	flagSet.CreateGroup("output", "Output",
 		flagSet.StringVarP(&options.OutputFile, "output", "o", "", "file to write output to"),
 		flagSet.BoolVarP(&options.JSON, "json", "oJ", false, "write output in JSONL(ines) format"),
@@ -180,17 +174,6 @@ func ParseOptions() *Options {
 
 	options.ConfigureOutput()
 	showBanner()
-
-	if !options.DisableUpdateCheck {
-		latestVersion, err := updateutils.GetToolVersionCallback("subfinder", version)()
-		if err != nil {
-			if options.Verbose {
-				gologger.Error().Msgf("subfinder version check failed: %v", err.Error())
-			}
-		} else {
-			gologger.Info().Msgf("Current subfinder version %v %v", version, updateutils.GetVersionDescription(version, latestVersion))
-		}
-	}
 
 	if options.ListSources {
 		listSources(options)
