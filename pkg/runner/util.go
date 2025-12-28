@@ -1,6 +1,6 @@
 package runner
 
-import "github.com/projectdiscovery/subfinder/v2/pkg/stringsutil"
+import "github.com/derinil/subfinder/v2/pkg/stringsutil"
 
 func loadFromFile(file string) ([]string, error) {
 	chanItems, err := ReadFile(file)

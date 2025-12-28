@@ -13,11 +13,11 @@ import (
 
 	"github.com/projectdiscovery/gologger"
 
-	"github.com/projectdiscovery/subfinder/v2/pkg/contextutil"
-	"github.com/projectdiscovery/subfinder/v2/pkg/mapsutil"
-	"github.com/projectdiscovery/subfinder/v2/pkg/passive"
-	"github.com/projectdiscovery/subfinder/v2/pkg/resolve"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
+	"github.com/derinil/subfinder/v2/pkg/contextutil"
+	"github.com/derinil/subfinder/v2/pkg/mapsutil"
+	"github.com/derinil/subfinder/v2/pkg/passive"
+	"github.com/derinil/subfinder/v2/pkg/resolve"
+	"github.com/derinil/subfinder/v2/pkg/subscraping"
 )
 
 // Runner is an instance of the subdomain enumeration

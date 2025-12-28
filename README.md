@@ -7,7 +7,7 @@
 
 
 <p align="center">
-<a href="https://goreportcard.com/report/github.com/projectdiscovery/subfinder/v2"><img src="https://goreportcard.com/badge/github.com/projectdiscovery/subfinder"></a>
+<a href="https://goreportcard.com/report/github.com/derinil/subfinder/v2"><img src="https://goreportcard.com/badge/github.com/projectdiscovery/subfinder"></a>
 <a href="https://github.com/projectdiscovery/subfinder/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
 <a href="https://github.com/projectdiscovery/subfinder/releases"><img src="https://img.shields.io/github/release/projectdiscovery/subfinder"></a>
 <a href="https://twitter.com/pdiscoveryio"><img src="https://img.shields.io/twitter/follow/pdiscoveryio.svg?logo=twitter"></a>
@@ -121,7 +121,7 @@ Subfinder supports environment variables to specify custom paths for configurati
 `subfinder` requires **go1.24** to install successfully. Run the following command to install the latest version:
 
 ```sh
-go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+go install -v github.com/derinil/subfinder/v2/cmd/subfinder@latest
 ```
 
 Learn about more ways to install subfinder here: https://docs.projectdiscovery.io/tools/subfinder/install.

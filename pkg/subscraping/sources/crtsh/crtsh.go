@@ -14,9 +14,9 @@ import (
 	// postgres driver
 	_ "github.com/lib/pq"
 
+	"github.com/derinil/subfinder/v2/pkg/contextutil"
+	"github.com/derinil/subfinder/v2/pkg/subscraping"
 	"github.com/projectdiscovery/gologger"
-	"github.com/projectdiscovery/subfinder/v2/pkg/contextutil"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
 )
 
 type subdomain struct {

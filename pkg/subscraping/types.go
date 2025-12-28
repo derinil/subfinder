@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/derinil/subfinder/v2/pkg/mapsutil"
 	"github.com/projectdiscovery/ratelimit"
-	"github.com/projectdiscovery/subfinder/v2/pkg/mapsutil"
 )
 
 type CtxArg string

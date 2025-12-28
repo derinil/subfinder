@@ -1,4 +1,5 @@
-// Package dnsdumpster logic
+
+w// Package dnsdumpster logic
 package dnsdumpster
 
 import (
@@ -7,7 +8,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
+	"github.com/derinil/subfinder/v2/pkg/subscraping"
 )
 
 type response struct {

@@ -7,11 +7,11 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/derinil/subfinder/v2/pkg/mapsutil"
+	"github.com/derinil/subfinder/v2/pkg/passive"
 	"github.com/projectdiscovery/gologger"
 	"github.com/projectdiscovery/gologger/formatter"
 	"github.com/projectdiscovery/gologger/levels"
-	"github.com/projectdiscovery/subfinder/v2/pkg/mapsutil"
-	"github.com/projectdiscovery/subfinder/v2/pkg/passive"
 )
 
 // validateOptions validates the configuration options passed

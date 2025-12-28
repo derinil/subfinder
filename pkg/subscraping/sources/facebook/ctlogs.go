@@ -9,9 +9,9 @@ import (
 	"slices"
 	"time"
 
+	"github.com/derinil/subfinder/v2/pkg/subscraping"
 	"github.com/projectdiscovery/gologger"
 	"github.com/projectdiscovery/retryablehttp-go"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
 )
 
 // source: https://developers.facebook.com/tools/ct

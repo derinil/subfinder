@@ -12,10 +12,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/exp/slices"
 
+	"github.com/derinil/subfinder/v2/pkg/subscraping"
 	"github.com/projectdiscovery/gologger"
 	"github.com/projectdiscovery/gologger/levels"
 	"github.com/projectdiscovery/ratelimit"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
 )
 
 func TestSourcesWithoutKeys(t *testing.T) {

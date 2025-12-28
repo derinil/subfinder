@@ -12,10 +12,10 @@ import (
 	"strings"
 	"time"
 
+	"github.com/derinil/subfinder/v2/pkg/passive"
+	"github.com/derinil/subfinder/v2/pkg/resolve"
 	"github.com/projectdiscovery/goflags"
 	"github.com/projectdiscovery/gologger"
-	"github.com/projectdiscovery/subfinder/v2/pkg/passive"
-	"github.com/projectdiscovery/subfinder/v2/pkg/resolve"
 )
 
 // Options contains the configuration options for tuning

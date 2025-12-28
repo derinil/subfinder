@@ -18,8 +18,8 @@ import (
 
 	"github.com/tomnomnom/linkheader"
 
+	"github.com/derinil/subfinder/v2/pkg/subscraping"
 	"github.com/projectdiscovery/gologger"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
 )
 
 type textMatch struct {
