@@ -57,7 +57,6 @@ import (
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/whoisxmlapi"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/windvane"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/zoomeyeapi"
-	mapsutil "github.com/projectdiscovery/utils/maps"
 )
 
 var AllSources = [...]subscraping.Source{
@@ -113,9 +112,6 @@ var AllSources = [...]subscraping.Source{
 	&digitalyama.Source{},
 	&thc.Source{},
 }
-
-var sourceWarnings = mapsutil.NewSyncLockMap[string, string](
-	mapsutil.WithMap(mapsutil.Map[string, string]{}))
 
 var NameSourceMap = make(map[string]subscraping.Source, len(AllSources))
 
@@ -175,12 +171,6 @@ func New(sourceNames, excludedSourceNames []string, useAllSources, useSourcesSup
 	}
 
 	gologger.Debug().Msgf("Selected source(s) for this search: %s", strings.Join(maps.Keys(sources), ", "))
-
-	for _, currentSource := range sources {
-		if warning, ok := sourceWarnings.Get(strings.ToLower(currentSource.Name())); ok {
-			gologger.Warning().Msg(warning)
-		}
-	}
 
 	// TODO: Consider refactoring this to avoid potential duplication issues
 	for _, source := range sources {
