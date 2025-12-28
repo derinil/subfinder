@@ -36,6 +36,8 @@ func NewRunner(options *Options) (*Runner, error) {
 	options.ConfigureOutput()
 	runner := &Runner{options: options}
 
+	gologger.DefaultLogger.SetMaxLevel(-1)
+
 	// Initialize the passive subdomain enumeration engine
 	runner.initializePassiveEngine()
 

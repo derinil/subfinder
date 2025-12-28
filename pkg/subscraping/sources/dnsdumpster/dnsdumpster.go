@@ -1,5 +1,4 @@
-
-w// Package dnsdumpster logic
+// Package dnsdumpster logic
 package dnsdumpster
 
 import (
