@@ -5,6 +5,7 @@ go 1.26.0
 require (
 	github.com/corpix/uarand v0.2.0
 	github.com/hako/durafmt v0.0.0-20210316092057-3a2c319c1acd
+	github.com/lib/pq v1.12.3
 	github.com/miekg/dns v1.1.73
 	github.com/projectdiscovery/blackrock v0.0.2
 	github.com/projectdiscovery/fdmax v0.0.4

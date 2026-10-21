@@ -21,6 +21,7 @@ import (
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/certspotter"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/commoncrawl"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/crtname"
+	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/crtsh"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/digitalyama"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/digitorus"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/dnsdb"
@@ -77,7 +78,7 @@ var AllSources = [...]subscraping.Source{
 	&certspotter.Source{},
 	// &chinaz.Source{},
 	&commoncrawl.Source{},
-	// &crtsh.Source{},
+	&crtsh.Source{},
 	&digitorus.Source{},
 	&dnsdb.Source{},
 	&dnsdumpster.Source{},
