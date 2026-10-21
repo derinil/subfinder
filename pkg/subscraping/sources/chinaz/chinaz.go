@@ -9,8 +9,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/derinil/subfinder/v2/pkg/subscraping"
 	jsoniter "github.com/json-iterator/go"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
 )
 
 // Source is the passive scraping agent

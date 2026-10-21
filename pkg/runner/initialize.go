@@ -2,14 +2,12 @@ package runner
 
 import (
 	"net"
-	"os"
 	"slices"
 	"strings"
 
+	"github.com/derinil/subfinder/v2/pkg/passive"
+	"github.com/derinil/subfinder/v2/pkg/resolve"
 	"github.com/projectdiscovery/dnsx/libs/dnsx"
-	"github.com/projectdiscovery/subfinder/v2/pkg/passive"
-	"github.com/projectdiscovery/subfinder/v2/pkg/resolve"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
 )
 
 // initializePassiveEngine creates the passive engine and loads sources etc
@@ -19,15 +17,6 @@ func (r *Runner) initializePassiveEngine(providerKeys map[string][]string) {
 	keys := make(map[string][]string, len(providerKeys))
 	for name, values := range providerKeys {
 		keys[name] = slices.Clone(values)
-	}
-
-	for _, source := range passive.NameSourceMap {
-		requirement := source.KeyRequirement()
-		if requirement == subscraping.RequiredKey || requirement == subscraping.OptionalKey {
-			if value := os.Getenv(strings.ToUpper(source.Name()) + "_API_KEY"); value != "" {
-				keys[strings.ToLower(source.Name())] = []string{value}
-			}
-		}
 	}
 
 	sources, excluded := slices.Clone(r.options.Sources), slices.Clone(r.options.ExcludeSources)
@@ -41,15 +30,6 @@ func (r *Runner) initializePassiveEngine(providerKeys map[string][]string) {
 // initializeResolver creates the resolver used to resolve the found subdomains
 func (r *Runner) initializeResolver() error {
 	var resolvers []string
-
-	// If the file has been provided, read resolvers from the file
-	if r.options.ResolverList != "" {
-		var err error
-		resolvers, err = loadFromFile(r.options.ResolverList)
-		if err != nil {
-			return err
-		}
-	}
 
 	if len(r.options.Resolvers) > 0 {
 		resolvers = append(resolvers, r.options.Resolvers...)

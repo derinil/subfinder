@@ -9,9 +9,9 @@ import (
 	"sync"
 	"time"
 
+	"github.com/derinil/subfinder/v2/pkg/mapsutil"
+	"github.com/derinil/subfinder/v2/pkg/subscraping"
 	"github.com/projectdiscovery/ratelimit"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
-	mapsutil "github.com/projectdiscovery/utils/maps"
 )
 
 type EnumerationOptions struct {

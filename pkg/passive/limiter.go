@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/derinil/subfinder/v2/pkg/subscraping"
 	"github.com/projectdiscovery/ratelimit"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
 )
 
 // RateLimiter shares provider budgets across a domain batch. Built-in requests

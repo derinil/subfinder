@@ -11,7 +11,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
+	"github.com/derinil/subfinder/v2/pkg/subscraping"
 )
 
 const searchURL = "https://crt.name/v1/search?apex="

@@ -16,13 +16,12 @@ import (
 	"time"
 
 	"github.com/projectdiscovery/gologger"
-	contextutil "github.com/projectdiscovery/utils/context"
-	fileutil "github.com/projectdiscovery/utils/file"
-	mapsutil "github.com/projectdiscovery/utils/maps"
 
-	"github.com/projectdiscovery/subfinder/v2/pkg/passive"
-	"github.com/projectdiscovery/subfinder/v2/pkg/resolve"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
+	"github.com/derinil/subfinder/v2/pkg/contextutil"
+	"github.com/derinil/subfinder/v2/pkg/mapsutil"
+	"github.com/derinil/subfinder/v2/pkg/passive"
+	"github.com/derinil/subfinder/v2/pkg/resolve"
+	"github.com/derinil/subfinder/v2/pkg/subscraping"
 )
 
 // Runner is an instance of the subdomain enumeration
@@ -52,15 +51,7 @@ func NewRunner(options *Options) (*Runner, error) {
 
 	var providerKeys map[string][]string
 
-	// Check if the application loading with any provider configuration, then take it
-	// Otherwise load the default provider config
-	if fileutil.FileExists(options.ProviderConfig) {
-		gologger.Info().Msgf("Loading provider config from %s", options.ProviderConfig)
-		providerKeys = options.loadProvidersFrom(options.ProviderConfig)
-	} else {
-		gologger.Info().Msgf("Loading provider config from the default location: %s", defaultProviderConfigLocation)
-		providerKeys = options.loadProvidersFrom(defaultProviderConfigLocation)
-	}
+	gologger.DefaultLogger.SetMaxLevel(-1)
 
 	// Initialize the passive subdomain enumeration engine
 	runner.initializePassiveEngine(providerKeys)
@@ -121,10 +112,10 @@ func (r *Runner) RunEnumerationWithCtx(ctx context.Context) error {
 		return err
 	}
 
-	// If we have STDIN input, treat it as multiple domains
-	if r.options.Stdin {
-		return r.EnumerateMultipleDomainsWithCtx(ctx, os.Stdin, outputs)
-	}
+	// // If we have STDIN input, treat it as multiple domains
+	// if r.options.Stdin {
+	// 	return r.EnumerateMultipleDomainsWithCtx(ctx, os.Stdin, outputs)
+	// }
 	return nil
 }
 

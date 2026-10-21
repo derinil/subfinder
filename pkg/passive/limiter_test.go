@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
+	"github.com/derinil/subfinder/v2/pkg/subscraping"
 )
 
 type limiterTransport struct{}

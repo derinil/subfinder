@@ -5,12 +5,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/derinil/subfinder/v2/pkg/mapsutil"
+	"github.com/derinil/subfinder/v2/pkg/subscraping"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-
-	mapsutil "github.com/projectdiscovery/utils/maps"
-
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
 )
 
 func newCustomRateLimit(counts map[string]uint, durations map[string]time.Duration) *subscraping.CustomRateLimit {

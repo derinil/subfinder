@@ -14,7 +14,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
+	"github.com/derinil/subfinder/v2/pkg/subscraping"
 )
 
 // Source is the passive scraping agent

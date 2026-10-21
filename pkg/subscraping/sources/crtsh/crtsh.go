@@ -15,9 +15,9 @@ import (
 	// postgres driver
 	_ "github.com/lib/pq"
 
+	"github.com/derinil/subfinder/v2/pkg/contextutil"
+	"github.com/derinil/subfinder/v2/pkg/subscraping"
 	"github.com/projectdiscovery/gologger"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
-	contextutil "github.com/projectdiscovery/utils/context"
 )
 
 type subdomain struct {
@@ -96,7 +96,7 @@ func (s *Source) getSubdomainsFromSQL(ctx context.Context, domain string, sessio
 
 	// We only consume NAME_VALUE downstream, so query for that directly instead
 	// of joining ct_log_entry / running x509_* parsers on every certificate.
-	// See https://github.com/projectdiscovery/subfinder/issues/1773.
+	// See https://github.com/derinil/subfinder/issues/1773.
 	query := fmt.Sprintf(`SELECT DISTINCT cai.NAME_VALUE
 				FROM certificate_and_identities cai
 				WHERE plainto_tsquery('certwatch', $1) @@ identities(cai.CERTIFICATE)

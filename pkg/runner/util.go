@@ -3,24 +3,8 @@ package runner
 import (
 	"strings"
 
-	fileutil "github.com/projectdiscovery/utils/file"
-	stringsutil "github.com/projectdiscovery/utils/strings"
+	"github.com/derinil/subfinder/v2/pkg/stringsutil"
 )
-
-func loadFromFile(file string) ([]string, error) {
-	var items []string
-	for item, err := range fileutil.Lines(file) {
-		if err != nil {
-			return nil, err
-		}
-		item = preprocessDomain(item)
-		if item == "" {
-			continue
-		}
-		items = append(items, item)
-	}
-	return items, nil
-}
 
 func preprocessDomain(s string) string {
 	s = stringsutil.NormalizeWithOptions(s,
@@ -38,7 +22,9 @@ func preprocessDomain(s string) string {
 	if idx := strings.IndexAny(s, "/?#"); idx != -1 {
 		s = s[:idx]
 	}
-	return s
+	// Drop the root label of an FQDN ("example.com.") so the enumerator's
+	// suffix check matches the normalized hosts reported by sources.
+	return strings.TrimSuffix(s, ".")
 }
 
 // normalizeSubdomain normalizes a subdomain reported by a source. Sources

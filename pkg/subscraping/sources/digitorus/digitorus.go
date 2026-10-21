@@ -10,14 +10,20 @@ import (
 	"sync"
 	"time"
 
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
-	"github.com/projectdiscovery/utils/ptr"
+	"github.com/derinil/subfinder/v2/pkg/subscraping"
 )
 
 // Source is the passive scraping agent
 type Source struct {
 	mu    sync.Mutex
 	stats subscraping.Statistics
+}
+
+func safePtr[T any](v *T) T {
+	if v == nil {
+		return *new(T)
+	}
+	return *v
 }
 
 // Run function returns all subdomains found with the service
@@ -36,8 +42,8 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 
 		stats.Requests++
 		resp, err := session.SimpleGet(ctx, fmt.Sprintf("https://certificatedetails.com/%s", domain))
-		// the 404 page still contains around 100 subdomains - https://github.com/projectdiscovery/subfinder/issues/774
-		if err != nil && ptr.Safe(resp).StatusCode != http.StatusNotFound {
+		// the 404 page still contains around 100 subdomains - https://github.com/derinil/subfinder/issues/774
+		if err != nil && safePtr(resp).StatusCode != http.StatusNotFound {
 			results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: err}
 			stats.Errors++
 			session.DiscardHTTPResponse(resp)

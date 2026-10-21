@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/derinil/subfinder/v2/pkg/resolve"
 	"github.com/projectdiscovery/goflags"
-	"github.com/projectdiscovery/subfinder/v2/pkg/resolve"
 	"github.com/stretchr/testify/require"
 )
 
