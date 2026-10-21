@@ -5,12 +5,11 @@ import (
 	"bufio"
 	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
 	"slices"
 	"sync"
 	"time"
-
-	jsoniter "github.com/json-iterator/go"
 
 	"github.com/derinil/subfinder/v2/pkg/subscraping"
 )
@@ -112,7 +111,7 @@ func enumerate(ctx context.Context, session *subscraping.Session, targetURL stri
 			continue
 		}
 		var response result
-		err = jsoniter.NewDecoder(bytes.NewBufferString(line)).Decode(&response)
+		err = json.NewDecoder(bytes.NewBufferString(line)).Decode(&response)
 		if err != nil {
 			return results, err
 		}

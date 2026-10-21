@@ -3,6 +3,7 @@ package gitlab
 import (
 	"bufio"
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -14,7 +15,6 @@ import (
 	"time"
 
 	"github.com/derinil/subfinder/v2/pkg/subscraping"
-	jsoniter "github.com/json-iterator/go"
 	"github.com/tomnomnom/linkheader"
 )
 
@@ -94,7 +94,7 @@ func (s *Source) enumerate(ctx context.Context, searchURL string, domainRegexp *
 	defer session.DiscardHTTPResponse(resp)
 
 	var items []item
-	err = jsoniter.NewDecoder(resp.Body).Decode(&items)
+	err = json.NewDecoder(resp.Body).Decode(&items)
 	if err != nil {
 		results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: err}
 		run.errors.Add(1)

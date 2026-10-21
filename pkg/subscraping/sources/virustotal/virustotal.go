@@ -3,13 +3,12 @@ package virustotal
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"slices"
 	"sync"
 	"time"
-
-	jsoniter "github.com/json-iterator/go"
 
 	"github.com/derinil/subfinder/v2/pkg/subscraping"
 )
@@ -87,7 +86,7 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 			}
 
 			var data response
-			err = jsoniter.NewDecoder(resp.Body).Decode(&data)
+			err = json.NewDecoder(resp.Body).Decode(&data)
 			// Close the body per iteration; deferring inside the loop would keep
 			// every page's body (and its connection) open until the goroutine exits.
 			if closeErr := resp.Body.Close(); closeErr != nil {

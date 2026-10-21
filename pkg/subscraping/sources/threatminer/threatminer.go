@@ -3,11 +3,10 @@ package threatminer
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"sync"
 	"time"
-
-	jsoniter "github.com/json-iterator/go"
 
 	"github.com/derinil/subfinder/v2/pkg/subscraping"
 )
@@ -50,7 +49,7 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 		defer session.DiscardHTTPResponse(resp)
 
 		var data response
-		err = jsoniter.NewDecoder(resp.Body).Decode(&data)
+		err = json.NewDecoder(resp.Body).Decode(&data)
 		if err != nil {
 			results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: err}
 			stats.Errors++

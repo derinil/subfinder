@@ -10,11 +10,11 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/derinil/subfinder/v2/pkg/gologger"
 	"github.com/derinil/subfinder/v2/pkg/passive"
 	"github.com/derinil/subfinder/v2/pkg/resolve"
 	"github.com/derinil/subfinder/v2/pkg/subscraping"
 	"github.com/projectdiscovery/goflags"
-	"github.com/projectdiscovery/gologger"
 )
 
 // Options contains the configuration options for tuning

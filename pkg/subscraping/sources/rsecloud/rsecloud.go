@@ -2,12 +2,11 @@ package rsecloud
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"slices"
 	"sync"
 	"time"
-
-	jsoniter "github.com/json-iterator/go"
 
 	"github.com/derinil/subfinder/v2/pkg/subscraping"
 )
@@ -74,7 +73,7 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 				}
 
 				var rseCloudResponse response
-				err = jsoniter.NewDecoder(resp.Body).Decode(&rseCloudResponse)
+				err = json.NewDecoder(resp.Body).Decode(&rseCloudResponse)
 				session.DiscardHTTPResponse(resp)
 				if err != nil {
 					results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: err}

@@ -14,8 +14,6 @@ import (
 	"sync"
 	"time"
 
-	jsoniter "github.com/json-iterator/go"
-
 	"github.com/derinil/subfinder/v2/pkg/subscraping"
 )
 
@@ -133,7 +131,7 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 				}
 
 				var response safResponse
-				err = jsoniter.Unmarshal(n, &response)
+				err = json.Unmarshal(n, &response)
 				if err != nil {
 					results <- subscraping.Result{Source: sourceName, Type: subscraping.Error, Error: err}
 					stats.Errors++
@@ -234,7 +232,7 @@ func getMaxOffset(ctx context.Context, session *subscraping.Session, headers map
 		return offsetMax, err
 	}
 	var rateResp rateResponse
-	err = jsoniter.Unmarshal(data, &rateResp)
+	err = json.Unmarshal(data, &rateResp)
 	if err != nil {
 		return offsetMax, err
 	}

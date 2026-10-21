@@ -1,7 +1,7 @@
 package runner
 
 import (
-	"github.com/projectdiscovery/gologger"
+	"github.com/derinil/subfinder/v2/pkg/gologger"
 )
 
 const banner = `

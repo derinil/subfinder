@@ -3,13 +3,12 @@ package bufferover
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"slices"
 	"strings"
 	"sync"
 	"time"
-
-	jsoniter "github.com/json-iterator/go"
 
 	"github.com/derinil/subfinder/v2/pkg/subscraping"
 )
@@ -71,7 +70,7 @@ func (s *Source) getData(ctx context.Context, sourceURL string, apiKey string, s
 	}
 
 	var bufforesponse response
-	err = jsoniter.NewDecoder(resp.Body).Decode(&bufforesponse)
+	err = json.NewDecoder(resp.Body).Decode(&bufforesponse)
 	if err != nil {
 		results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: err}
 		stats.Errors++

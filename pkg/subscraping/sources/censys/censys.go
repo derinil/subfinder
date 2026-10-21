@@ -4,12 +4,11 @@ package censys
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"net/http"
 	"strings"
 	"sync"
 	"time"
-
-	jsoniter "github.com/json-iterator/go"
 
 	"github.com/derinil/subfinder/v2/pkg/subscraping"
 )
@@ -128,7 +127,7 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 				reqBody.Cursor = cursor
 			}
 
-			bodyBytes, err := jsoniter.Marshal(reqBody)
+			bodyBytes, err := json.Marshal(reqBody)
 			if err != nil {
 				results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: err}
 				stats.Errors++
@@ -163,7 +162,7 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 			}
 
 			var censysResponse response
-			err = jsoniter.NewDecoder(resp.Body).Decode(&censysResponse)
+			err = json.NewDecoder(resp.Body).Decode(&censysResponse)
 			_ = resp.Body.Close()
 			if err != nil {
 				results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: err}

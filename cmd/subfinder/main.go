@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/derinil/subfinder/v2/pkg/runner"
 	// Attempts to increase the OS file descriptors - Fail silently
+	"github.com/derinil/subfinder/v2/pkg/gologger"
 	_ "github.com/projectdiscovery/fdmax/autofdmax"
-	"github.com/projectdiscovery/gologger"
 )
 
 func main() {

@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"strings"
 
-	"github.com/projectdiscovery/gologger"
+	"github.com/derinil/subfinder/v2/pkg/gologger"
 )
 
 const MultipleKeyPartsLength = 2

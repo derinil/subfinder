@@ -9,9 +9,9 @@ import (
 
 	"gopkg.in/yaml.v3"
 
+	"github.com/derinil/subfinder/v2/pkg/gologger"
 	"github.com/derinil/subfinder/v2/pkg/passive"
 	"github.com/derinil/subfinder/v2/pkg/subscraping"
-	"github.com/projectdiscovery/gologger"
 )
 
 // createProviderConfigYAML marshals the input map to the given location on the disk

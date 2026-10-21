@@ -15,7 +15,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/projectdiscovery/gologger"
+	"github.com/derinil/subfinder/v2/pkg/gologger"
 
 	"github.com/derinil/subfinder/v2/pkg/contextutil"
 	"github.com/derinil/subfinder/v2/pkg/mapsutil"

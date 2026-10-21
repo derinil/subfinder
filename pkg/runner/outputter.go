@@ -2,13 +2,12 @@ package runner
 
 import (
 	"bufio"
+	"encoding/json"
 	"errors"
 	"io"
 	"os"
 	"path/filepath"
 	"strings"
-
-	jsoniter "github.com/json-iterator/go"
 
 	"github.com/derinil/subfinder/v2/pkg/resolve"
 )
@@ -111,7 +110,7 @@ func writePlainHostIP(_ string, results map[string]resolve.Result, writer io.Wri
 }
 
 func writeJSONHostIP(input string, results map[string]resolve.Result, writer io.Writer) error {
-	encoder := jsoniter.NewEncoder(writer)
+	encoder := json.NewEncoder(writer)
 
 	var data jsonSourceIPResult
 
@@ -171,7 +170,7 @@ func writePlainHost(_ string, results map[string]resolve.HostEntry, writer io.Wr
 }
 
 func writeJSONHost(input string, results map[string]resolve.HostEntry, writer io.Writer) error {
-	encoder := jsoniter.NewEncoder(writer)
+	encoder := json.NewEncoder(writer)
 
 	var data jsonSourceResult
 	for _, result := range results {
@@ -199,7 +198,7 @@ func (o *OutputWriter) WriteSourceHost(input string, sourceMap map[string]map[st
 }
 
 func writeSourceJSONHost(input string, sourceMap map[string]map[string]struct{}, writer io.Writer) error {
-	encoder := jsoniter.NewEncoder(writer)
+	encoder := json.NewEncoder(writer)
 
 	var data jsonSourcesResult
 

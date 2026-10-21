@@ -1,7 +1,6 @@
 package subscraping
 
 import (
-	"bytes"
 	"context"
 	"crypto/tls"
 	"fmt"
@@ -14,7 +13,7 @@ import (
 	"github.com/corpix/uarand"
 	"github.com/projectdiscovery/ratelimit"
 
-	"github.com/projectdiscovery/gologger"
+	"github.com/derinil/subfinder/v2/pkg/gologger"
 )
 
 // limitedResponseBody wraps a response body so that at most maxSize bytes can
@@ -183,11 +182,11 @@ func httpRequestWrapper(client *http.Client, request *http.Request, maxResponseB
 	if response.StatusCode != http.StatusOK {
 		requestURL, _ := url.QueryUnescape(request.URL.String())
 
-		gologger.Debug().MsgFunc(func() string {
-			buffer := new(bytes.Buffer)
-			_, _ = buffer.ReadFrom(response.Body)
-			return fmt.Sprintf("Response for failed request against %s:\n%s", requestURL, buffer.String())
-		})
+		// gologger.Debug().MsgFunc(func() string {
+		// 	buffer := new(bytes.Buffer)
+		// 	_, _ = buffer.ReadFrom(response.Body)
+		// 	return fmt.Sprintf("Response for failed request against %s:\n%s", requestURL, buffer.String())
+		// })
 		return response, fmt.Errorf("unexpected status code %d received from %s", response.StatusCode, requestURL)
 	}
 	return response, nil

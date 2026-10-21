@@ -12,9 +12,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
+	"github.com/derinil/subfinder/v2/pkg/gologger"
 	"github.com/derinil/subfinder/v2/pkg/subscraping"
-	"github.com/projectdiscovery/gologger"
-	"github.com/projectdiscovery/gologger/levels"
 	"github.com/projectdiscovery/ratelimit"
 )
 
@@ -26,7 +25,7 @@ func TestSourcesWithKeys(t *testing.T) {
 	domain := "hackerone.com"
 	timeout := 60
 
-	gologger.DefaultLogger.SetMaxLevel(levels.LevelDebug)
+	gologger.SetMaxLevel(gologger.LevelDebug)
 
 	ctxParent := context.Background()
 	var multiRateLimiter *ratelimit.MultiLimiter

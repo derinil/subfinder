@@ -3,12 +3,12 @@ package reconcloud
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"sync"
 	"time"
 
 	"github.com/derinil/subfinder/v2/pkg/subscraping"
-	jsoniter "github.com/json-iterator/go"
 )
 
 type reconCloudResponse struct {
@@ -55,7 +55,7 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 		}
 
 		var response reconCloudResponse
-		err = jsoniter.NewDecoder(resp.Body).Decode(&response)
+		err = json.NewDecoder(resp.Body).Decode(&response)
 		if err != nil {
 			results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: err}
 			stats.Errors++

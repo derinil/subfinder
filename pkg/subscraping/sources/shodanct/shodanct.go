@@ -3,12 +3,11 @@ package shodanct
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"sync"
 	"time"
-
-	jsoniter "github.com/json-iterator/go"
 
 	"github.com/derinil/subfinder/v2/pkg/subscraping"
 )
@@ -56,7 +55,7 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 		defer session.DiscardHTTPResponse(resp)
 
 		var hostnames []string
-		if err := jsoniter.NewDecoder(resp.Body).Decode(&hostnames); err != nil {
+		if err := json.NewDecoder(resp.Body).Decode(&hostnames); err != nil {
 			results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: err}
 			stats.Errors++
 			return

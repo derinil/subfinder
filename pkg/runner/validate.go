@@ -7,11 +7,9 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/derinil/subfinder/v2/pkg/gologger"
 	"github.com/derinil/subfinder/v2/pkg/mapsutil"
 	"github.com/derinil/subfinder/v2/pkg/passive"
-	"github.com/projectdiscovery/gologger"
-	"github.com/projectdiscovery/gologger/formatter"
-	"github.com/projectdiscovery/gologger/levels"
 )
 
 // validateOptions validates the configuration options passed
@@ -105,12 +103,13 @@ func stripRegexString(val string) string {
 func (options *Options) ConfigureOutput() {
 	// If the user desires verbose output, show verbose output
 	if options.Verbose {
-		gologger.DefaultLogger.SetMaxLevel(levels.LevelVerbose)
+		gologger.SetMaxLevel(gologger.LevelVerbose)
 	}
-	if options.NoColor {
-		gologger.DefaultLogger.SetFormatter(formatter.NewCLI(true))
-	}
+	// if options.NoColor {
+	// 	gologger.DefaultLogger.SetFormatter(formatter.NewCLI(true))
+	// }
 	if options.Silent {
-		gologger.DefaultLogger.SetMaxLevel(levels.LevelSilent)
+		gologger.SetMaxLevel(gologger.LevelSilent)
+		// gologger.DefaultLogger.SetMaxLevel(levels.LevelSilent)
 	}
 }

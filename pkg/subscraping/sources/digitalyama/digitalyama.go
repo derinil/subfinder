@@ -2,12 +2,11 @@ package digitalyama
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"slices"
 	"sync"
 	"time"
-
-	jsoniter "github.com/json-iterator/go"
 
 	"github.com/derinil/subfinder/v2/pkg/subscraping"
 )
@@ -73,7 +72,7 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 					Type string   `json:"type"`
 				} `json:"detail"`
 			}
-			err = jsoniter.NewDecoder(resp.Body).Decode(&errResponse)
+			err = json.NewDecoder(resp.Body).Decode(&errResponse)
 			if err != nil {
 				results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: fmt.Errorf("unexpected status code %d", resp.StatusCode)}
 				stats.Errors++
@@ -90,7 +89,7 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 		}
 
 		var response digitalYamaResponse
-		err = jsoniter.NewDecoder(resp.Body).Decode(&response)
+		err = json.NewDecoder(resp.Body).Decode(&response)
 		if err != nil {
 			results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: err}
 			stats.Errors++

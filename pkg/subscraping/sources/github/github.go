@@ -5,6 +5,7 @@ package github
 import (
 	"bufio"
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -16,12 +17,10 @@ import (
 	"sync/atomic"
 	"time"
 
-	jsoniter "github.com/json-iterator/go"
-
 	"github.com/tomnomnom/linkheader"
 
+	"github.com/derinil/subfinder/v2/pkg/gologger"
 	"github.com/derinil/subfinder/v2/pkg/subscraping"
-	"github.com/projectdiscovery/gologger"
 )
 
 type textMatch struct {
@@ -143,7 +142,7 @@ func (s *Source) enumerate(ctx context.Context, searchURL string, domainRegexp *
 	var data response
 
 	// Marshall json response
-	err = jsoniter.NewDecoder(resp.Body).Decode(&data)
+	err = json.NewDecoder(resp.Body).Decode(&data)
 	if err != nil {
 		results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: err}
 		run.errors.Add(1)

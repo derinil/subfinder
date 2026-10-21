@@ -5,9 +5,9 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/derinil/subfinder/v2/pkg/dnsx/libs/dnsx"
 	"github.com/derinil/subfinder/v2/pkg/passive"
 	"github.com/derinil/subfinder/v2/pkg/resolve"
-	"github.com/projectdiscovery/dnsx/libs/dnsx"
 )
 
 // initializePassiveEngine creates the passive engine and loads sources etc

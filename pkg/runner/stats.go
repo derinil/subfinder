@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/derinil/subfinder/v2/pkg/gologger"
 	"github.com/derinil/subfinder/v2/pkg/subscraping"
-	"github.com/projectdiscovery/gologger"
 )
 
 func printStatistics(stats map[string]subscraping.Statistics) {

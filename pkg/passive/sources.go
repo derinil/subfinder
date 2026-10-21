@@ -9,6 +9,7 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/derinil/subfinder/v2/pkg/gologger"
 	"github.com/derinil/subfinder/v2/pkg/subscraping"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/alienvault"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/anubis"
@@ -18,10 +19,8 @@ import (
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/c99"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/censys"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/certspotter"
-	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/chinaz"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/commoncrawl"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/crtname"
-	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/crtsh"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/digitalyama"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/digitorus"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/dnsdb"
@@ -66,7 +65,6 @@ import (
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/whoisxmlapi"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/windvane"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/zoomeyeapi"
-	"github.com/projectdiscovery/gologger"
 )
 
 var AllSources = [...]subscraping.Source{
@@ -77,9 +75,9 @@ var AllSources = [...]subscraping.Source{
 	&c99.Source{},
 	&censys.Source{},
 	&certspotter.Source{},
-	&chinaz.Source{},
+	// &chinaz.Source{},
 	&commoncrawl.Source{},
-	&crtsh.Source{},
+	// &crtsh.Source{},
 	&digitorus.Source{},
 	&dnsdb.Source{},
 	&dnsdumpster.Source{},
@@ -130,10 +128,8 @@ var AllSources = [...]subscraping.Source{
 	&c99.Source{},
 	&censys.Source{},
 	&certspotter.Source{},
-	&chinaz.Source{},
 	&commoncrawl.Source{},
 	&crtname.Source{},
-	&crtsh.Source{},
 	&digitalyama.Source{},
 	&digitorus.Source{},
 	&dnsdb.Source{},

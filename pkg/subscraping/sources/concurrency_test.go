@@ -22,10 +22,8 @@ import (
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/c99"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/censys"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/certspotter"
-	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/chinaz"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/commoncrawl"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/crtname"
-	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/crtsh"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/digitalyama"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/digitorus"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/dnsdb"
@@ -424,10 +422,9 @@ func concurrencySources() []subscraping.Source {
 		&c99.Source{},
 		&censys.Source{},
 		&certspotter.Source{},
-		&chinaz.Source{},
+		// &chinaz.Source{},
 		&commoncrawl.Source{},
 		&crtname.Source{},
-		&crtsh.Source{},
 		&digitalyama.Source{},
 		&digitorus.Source{},
 		&dnsdb.Source{},

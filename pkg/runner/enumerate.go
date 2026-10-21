@@ -12,7 +12,7 @@ import (
 
 	"github.com/hako/durafmt"
 
-	"github.com/projectdiscovery/gologger"
+	"github.com/derinil/subfinder/v2/pkg/gologger"
 
 	"github.com/derinil/subfinder/v2/pkg/passive"
 	"github.com/derinil/subfinder/v2/pkg/resolve"

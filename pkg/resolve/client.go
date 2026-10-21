@@ -3,7 +3,7 @@ package resolve
 import (
 	"context"
 
-	"github.com/projectdiscovery/dnsx/libs/dnsx"
+	"github.com/derinil/subfinder/v2/pkg/dnsx/libs/dnsx"
 )
 
 // DefaultResolvers contains the default list of resolvers known to be good
