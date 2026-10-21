@@ -36,7 +36,6 @@ import (
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/hackertarget"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/hudsonrock"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/intelx"
-	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/leakix"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/merklemap"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/netlas"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/onyphe"
@@ -44,10 +43,8 @@ import (
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/pugrecon"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/quake"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/rapiddns"
-	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/reconcloud"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/reconeer"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/redhuntlabs"
-	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/riddler"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/robtex"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/rsecloud"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/scanmalware"
@@ -55,7 +52,6 @@ import (
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/shodanct"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/sitedossier"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/subdomaincenter"
-	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/submd"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/thc"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/threatbook"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/threatcrowd"
@@ -93,7 +89,7 @@ var AllSources = [...]subscraping.Source{
 	&netlas.Source{},
 	&merklemap.Source{},
 	&onyphe.Source{},
-	&leakix.Source{},
+	// &leakix.Source{},
 	&quake.Source{},
 	&pugrecon.Source{},
 	&rapiddns.Source{},
@@ -145,7 +141,7 @@ var AllSources = [...]subscraping.Source{
 	&hackertarget.Source{},
 	&hudsonrock.Source{},
 	&intelx.Source{},
-	&leakix.Source{},
+	// &leakix.Source{},
 	&merklemap.Source{},
 	&netlas.Source{},
 	&onyphe.Source{},
@@ -153,10 +149,10 @@ var AllSources = [...]subscraping.Source{
 	&pugrecon.Source{},
 	&quake.Source{},
 	&rapiddns.Source{},
-	&reconcloud.Source{},
+	// &reconcloud.Source{},
 	&reconeer.Source{},
 	&redhuntlabs.Source{},
-	&riddler.Source{},
+	// &riddler.Source{},
 	&robtex.Source{},
 	&rsecloud.Source{},
 	&scanmalware.Source{},
@@ -164,7 +160,7 @@ var AllSources = [...]subscraping.Source{
 	&shodanct.Source{},
 	&sitedossier.Source{},
 	&subdomaincenter.Source{},
-	&submd.Source{},
+	// &submd.Source{},
 	&thc.Source{},
 	&threatbook.Source{},
 	&threatcrowd.Source{},
