@@ -4,6 +4,7 @@ import "fmt"
 
 type Event struct {
 	level Level
+	label string
 }
 
 type Level int
@@ -24,18 +25,32 @@ func (l Level) String() string {
 	return [...]string{"fatal", "silent", "error", "info", "warning", "debug", "verbose"}[l]
 }
 
-func (e *Event) Label(label string) *Event { return e }
+func (e *Event) Label(label string) *Event {
+	e.label = label
+	return e
+}
 func (e *Event) Msg(message string) {
 	if e.level > MaxLevel {
 		return
 	}
-	fmt.Println(e.level.String() + " - " + message)
+	fmt.Println(e.level.String() + " - ")
+	if e.label != "" {
+		fmt.Print(e.label)
+		fmt.Print(" - ")
+	}
+	fmt.Println(message)
 }
 func (e *Event) Msgf(format string, args ...any) {
 	if e.level > MaxLevel {
 		return
 	}
-	fmt.Println(e.level.String() + " - " + fmt.Sprintf(format, args...))
+	fmt.Print(e.level.String() + " - ")
+	if e.label != "" {
+		fmt.Print(e.label)
+		fmt.Print(" - ")
+	}
+	fmt.Printf(format, args...)
+	fmt.Println()
 }
 
 func SetMaxLevel(l Level) { MaxLevel = l }

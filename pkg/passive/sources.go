@@ -55,7 +55,6 @@ import (
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/thc"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/threatbook"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/threatcrowd"
-	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/threatminer"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/urlscan"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/virustotal"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/waybackarchive"
@@ -164,7 +163,7 @@ var AllSources = [...]subscraping.Source{
 	&thc.Source{},
 	&threatbook.Source{},
 	&threatcrowd.Source{},
-	&threatminer.Source{},
+	// &threatminer.Source{},
 	&urlscan.Source{},
 	&virustotal.Source{},
 	&waybackarchive.Source{},
