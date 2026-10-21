@@ -51,8 +51,6 @@ func NewRunner(options *Options) (*Runner, error) {
 
 	var providerKeys map[string][]string
 
-	gologger.DefaultLogger.SetMaxLevel(-1)
-
 	// Initialize the passive subdomain enumeration engine
 	runner.initializePassiveEngine(providerKeys)
 

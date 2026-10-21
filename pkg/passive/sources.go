@@ -20,6 +20,7 @@ import (
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/certspotter"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/chinaz"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/commoncrawl"
+	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/crtname"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/crtsh"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/digitalyama"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/digitorus"
@@ -31,6 +32,7 @@ import (
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/fofa"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/fullhunt"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/github"
+	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/gitlab"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/hackertarget"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/hudsonrock"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/intelx"
@@ -42,14 +44,23 @@ import (
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/pugrecon"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/quake"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/rapiddns"
+	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/reconcloud"
+	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/reconeer"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/redhuntlabs"
+	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/riddler"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/robtex"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/rsecloud"
+	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/scanmalware"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/shodan"
+	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/shodanct"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/sitedossier"
+	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/subdomaincenter"
+	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/submd"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/thc"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/threatbook"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/threatcrowd"
+	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/threatminer"
+	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/urlscan"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/virustotal"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/waybackarchive"
 	"github.com/derinil/subfinder/v2/pkg/subscraping/sources/whoisxmlapi"
@@ -102,6 +113,7 @@ var AllSources = [...]subscraping.Source{
 	&whoisxmlapi.Source{},
 	&windvane.Source{},
 	&zoomeyeapi.Source{},
+	&urlscan.Source{},
 	// &facebook.Source{},
 	// &threatminer.Source{}, // failing  api
 	// &reconcloud.Source{}, // failing due to cloudflare bot protection
@@ -109,6 +121,63 @@ var AllSources = [...]subscraping.Source{
 	&hudsonrock.Source{},
 	&digitalyama.Source{},
 	&thc.Source{},
+
+	&alienvault.Source{},
+	&anubis.Source{},
+	&bevigil.Source{},
+	&bufferover.Source{},
+	&builtwith.Source{},
+	&c99.Source{},
+	&censys.Source{},
+	&certspotter.Source{},
+	&chinaz.Source{},
+	&commoncrawl.Source{},
+	&crtname.Source{},
+	&crtsh.Source{},
+	&digitalyama.Source{},
+	&digitorus.Source{},
+	&dnsdb.Source{},
+	&dnsdumpster.Source{},
+	&dnsrepo.Source{},
+	&domainsproject.Source{},
+	&driftnet.Source{},
+	&fofa.Source{},
+	&fullhunt.Source{},
+	&github.Source{},
+	&gitlab.Source{},
+	&hackertarget.Source{},
+	&hudsonrock.Source{},
+	&intelx.Source{},
+	&leakix.Source{},
+	&merklemap.Source{},
+	&netlas.Source{},
+	&onyphe.Source{},
+	&profundis.Source{},
+	&pugrecon.Source{},
+	&quake.Source{},
+	&rapiddns.Source{},
+	&reconcloud.Source{},
+	&reconeer.Source{},
+	&redhuntlabs.Source{},
+	&riddler.Source{},
+	&robtex.Source{},
+	&rsecloud.Source{},
+	&scanmalware.Source{},
+	&shodan.Source{},
+	&shodanct.Source{},
+	&sitedossier.Source{},
+	&subdomaincenter.Source{},
+	&submd.Source{},
+	&thc.Source{},
+	&threatbook.Source{},
+	&threatcrowd.Source{},
+	&threatminer.Source{},
+	&urlscan.Source{},
+	&virustotal.Source{},
+	&waybackarchive.Source{},
+	&whoisxmlapi.Source{},
+	&windvane.Source{},
+	&zoomeyeapi.Source{},
 }
 
 var NameSourceMap = make(map[string]subscraping.Source, len(AllSources))
