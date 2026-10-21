@@ -33,7 +33,7 @@ func (e *Event) Msg(message string) {
 	if e.level > MaxLevel {
 		return
 	}
-	fmt.Println(e.level.String() + " - ")
+	fmt.Print(e.level.String() + " - ")
 	if e.label != "" {
 		fmt.Print(e.label)
 		fmt.Print(" - ")
